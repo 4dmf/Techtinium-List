@@ -1,12 +1,16 @@
-# AdGuard Home - List
+# Techtinium SafeList
 
 ![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-allow.json&style=for-the-badge&logo=firefox) 
 ![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-block.json&style=for-the-badge&logo=AdBlock) 
 
-Varied and carefully selected filter lists and consolidates for use in [AdGuard Home](https://ealen.dev/posts/raspberry/dns-sinkhole/). (Updated every day at 4 AM)
+Fork of [Ealenn/AdGuard-Home-List](https://github.com/Ealenn/AdGuard-Home-List), focused on one goal: formatting and curating safelist/allowlist data according to Techtinium standards for use in [AdGuard Home](https://ealen.dev/posts/raspberry/dns-sinkhole/).
 
-- [AdGuard Home - List](#adguard-home---list)
+This repository keeps the upstream list-building workflow while adapting structure and content conventions for Techtinium's SafeList requirements.
+
+
+- [Techtinium SafeList](#techtinium-safelist)
 	- [How to use this project](#how-to-use-this-project)
+	- [About this fork](#about-this-fork)
 	- [Custom List Provider](#custom-list-provider)
 	- [External List Provider](#external-list-provider)
 		- [Contains](#contains)
@@ -18,15 +22,23 @@ Varied and carefully selected filter lists and consolidates for use in [AdGuard 
 
 ## How to use this project
 
-Once you have AdGuard Home ready and are logged in, use its main menu to add one blocklist and one allowlist.
+Once you have Techtinium ready and are logged in, go to Settings -> Blocking to add one blocklist and one allowlist.
+
+Use the generated list URLs from this fork's release output.
 
 ```sh
 # BlockList
-https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/AdGuard-Home-List.Block.txt
+https://raw.githubusercontent.com/steven-aranaga/Techtinium-SafeList/gh-pages/Techtinium-List.Block.txt
 
 # AllowList
-https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/AdGuard-Home-List.Allow.txt
+!https://raw.githubusercontent.com/steven-aranaga/Techtinium-SafeList/gh-pages/Techtinium-List.Allow.txt
 ```
+
+## About this fork
+
+- Purpose: maintain a Techtinium-formatted SafeList based on the upstream AdGuard Home list ecosystem.
+- Scope: keep upstream-compatible list generation while refining safelist formatting and organization for Techtinium standards.
+- Upstream: [Ealenn/AdGuard-Home-List](https://github.com/Ealenn/AdGuard-Home-List)
 
 ## Custom List Provider
 
@@ -120,11 +132,17 @@ tls://1.1.1.1
 216.146.36.36
 ```
 
-## Local
+## Building locally
+
+1. `cd modules/cli`
+2. `npm install`
+3. `npm run build`
+
+This will generate the js files needed to run below from repo root.
 
 ```sh
 node ./modules/cli/dist/main.js generate \
---name AdGuard-Home-List.Allow.txt \
+--name Techtinum-List.Allow.txt \
 --badge badge-allow.json \
 --external ./allowlist/external \
 --custom ./allowlist/custom \
@@ -133,10 +151,9 @@ node ./modules/cli/dist/main.js generate \
 --output ./dist
 
 node ./modules/cli/dist/main.js generate \
---name AdGuard-Home-List.Block.txt \
+--name Techtinum-List.Block.txt \
 --badge badge-block.json \
 --external ./blocklist/external \
 --custom ./blocklist/custom \
 --concatExternal ./blocklist/concat \
 --output ./dist
-```

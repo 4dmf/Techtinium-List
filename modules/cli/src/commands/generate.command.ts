@@ -128,7 +128,7 @@ export class GenerateCommand extends CommandRunner {
   private getFileData(debug: boolean): string {
     const fileLines: string[] = [];
     for (const rule of this._list.export()) {
-      let line = rule[0];
+      let line = rule[0].replace(/\^\$important$/, '');
       if (debug) {
         line = `${line} #${rule[1]}`;
       }

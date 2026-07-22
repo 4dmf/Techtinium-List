@@ -4,14 +4,14 @@
   "description": "Generate AdGuard Lists",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ealenn/AdGuard-Home-List.git"
+    "url": "git+https://github.com/steven-aranaga/Techtinium-List.git"
   },
   "author": "Rudy Marchandise",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Ealenn/AdGuard-Home-List/issues"
+    "url": "https://github.com/steven-aranaga/Techtinium-List/issues"
   },
-  "homepage": "https://github.com/Ealenn/AdGuard-Home-List#readme",
+  "homepage": "https://github.com/steven-aranaga/Techtinium-List#readme",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -77,5 +77,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }

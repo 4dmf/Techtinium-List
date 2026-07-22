@@ -32,7 +32,7 @@ jobs:
     - name: Generate AllowList
       run: |
         node ./modules/cli/dist/main.js generate \
-        --name AdGuard-Home-List.Allow.txt \
+        --name Techtinium-List.Allow.txt \
         --badge badge-allow.json \
         --external ./allowlist/external \
         --custom ./allowlist/custom \
@@ -43,7 +43,7 @@ jobs:
     - name: Generate BlockList
       run: |
         node ./modules/cli/dist/main.js generate \
-        --name AdGuard-Home-List.Block.txt \
+        --name Techtinium-List.Block.txt \
         --badge badge-block.json \
         --external ./blocklist/external \
         --custom ./blocklist/custom \
@@ -52,10 +52,10 @@ jobs:
 
     - name: Split Public/Debug
       run: |
-        split -b 50m -d -a 3 "public/debug.AdGuard-Home-List.Allow.txt" "public/Debug-AdGuard-Home-List.Allow.txt.part-"
-        split -b 50m -d -a 3 "public/debug.AdGuard-Home-List.Block.txt" "public/Debug-AdGuard-Home-List.Block.txt.part-"
-        rm public/debug.AdGuard-Home-List.Allow.txt
-        rm public/debug.AdGuard-Home-List.Block.txt
+        split -b 50m -d -a 3 "public/debug.Techtinium-List.Allow.txt" "public/Debug-Techtinium-List.Allow.txt.part-"
+        split -b 50m -d -a 3 "public/debug.Techtinium-List.Block.txt" "public/Debug-Techtinium-List.Block.txt.part-"
+        rm public/debug.Techtinium-List.Allow.txt
+        rm public/debug.Techtinium-List.Block.txt
       env:
         CI: true
 
