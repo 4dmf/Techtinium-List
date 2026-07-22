@@ -3,12 +3,12 @@
 ![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-allow.json&style=for-the-badge&logo=firefox) 
 ![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-block.json&style=for-the-badge&logo=AdBlock) 
 
-Fork of [Ealenn/AdGuard-Home-List](https://github.com/Ealenn/AdGuard-Home-List), focused on one goal: formatting and curating safelist/allowlist data according to Techtinium standards for use in [AdGuard Home](https://ealen.dev/posts/raspberry/dns-sinkhole/).
+Fork of [Ealenn/AdGuard-Home-List](https://github.com/Ealenn/AdGuard-Home-List), focused on one goal: formatting and curating safelist/allowlist data according to Techtinum standards for use in [Techtinum](https://technitium.com/dns/).
 
-This repository keeps the upstream list-building workflow while adapting structure and content conventions for Techtinium's SafeList requirements.
+This repository keeps the upstream list-building workflow while adapting structure and content conventions for Techtinum's SafeList requirements.
 
-
-- [Techtinium SafeList](#techtinium-safelist)
+## Table of Contents
+- [Techtinum SafeList](#techtinum-safelist)
 	- [How to use this project](#how-to-use-this-project)
 	- [About this fork](#about-this-fork)
 	- [Custom List Provider](#custom-list-provider)
