@@ -4,14 +4,14 @@
   "description": "Generate AdGuard Lists",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/steven-aranaga/Techtinium-List.git"
+    "url": "git+https://github.com/4dmf/Techtinium-List.git"
   },
   "author": "Rudy Marchandise",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/steven-aranaga/Techtinium-List/issues"
+    "url": "https://github.com/4dmf/Techtinium-List/issues"
   },
-  "homepage": "https://github.com/steven-aranaga/Techtinium-List#readme",
+  "homepage": "https://github.com/4dmf/Techtinium-List#readme",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
