@@ -30,7 +30,7 @@ Use the generated list URLs from this fork's release output.
 # BlockList
 https://raw.githubusercontent.com/steven-aranaga/Techtinium-SafeList/gh-pages/Techtinium-List.Block.txt
 
-# AllowList
+# AllowList (Be sure to use the exclamation point as this is no longer formatted for AdGuard Home)
 !https://raw.githubusercontent.com/steven-aranaga/Techtinium-SafeList/gh-pages/Techtinium-List.Allow.txt
 ```
 
