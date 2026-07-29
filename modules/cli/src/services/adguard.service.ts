@@ -22,18 +22,10 @@ export class AdguardRuleService {
     }
 
     if (value.match(IP_REGEX)) {
-      if (allowRule) {
-        return `@@${value}$network`;
-      } else {
-        return `${value}$network`;
-      }
+      return `${value}$network`;
     }
 
-    if (allowRule) {
-      return `@@||${value}^$important`;
-    } else {
-      return `||${value}^`;
-    }
+    return `${value}`;
   }
 
   public FromAdGuard(value: string): string | null {
