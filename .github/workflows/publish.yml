@@ -59,6 +59,34 @@ jobs:
       env:
         CI: true
 
+    - name: Build Pages Index
+      run: |
+        {
+          echo '<!doctype html>'
+          echo '<html lang="en">'
+          echo '<head>'
+          echo '  <meta charset="utf-8">'
+          echo '  <meta name="viewport" content="width=device-width, initial-scale=1">'
+          echo '  <title>Techtinium List</title>'
+          echo '  <style>'
+          echo '    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }'
+          echo '    h1 { margin-bottom: 0.5rem; }'
+          echo '    ul { padding-left: 1.2rem; }'
+          echo '    li { margin: 0.25rem 0; }'
+          echo '  </style>'
+          echo '</head>'
+          echo '<body>'
+          echo '  <h1>Techtinium List</h1>'
+          echo '  <p>Generated files:</p>'
+          echo '  <ul>'
+          find public -maxdepth 1 -type f -not -name 'index.html' -printf '%f\n' | sort | while IFS= read -r file; do
+            printf '    <li><a href="%s">%s</a></li>\n' "$file" "$file"
+          done
+          echo '  </ul>'
+          echo '</body>'
+          echo '</html>'
+        } > public/index.html
+
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
       with:
