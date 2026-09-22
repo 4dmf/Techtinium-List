@@ -1,4 +1,4 @@
 # Github
-@@||github.com^$important
-@@||github.io^$important
-@@||githubusercontent.com^$important
+github.com
+github.io
+githubusercontent.com

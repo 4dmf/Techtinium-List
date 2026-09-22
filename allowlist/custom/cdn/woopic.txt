@@ -1,4 +1,4 @@
 # Woopic | Orange
-@@||cdn.woopic.com^$important
-@@||proxymedia.woopic.com^$important
-@@||c.woopic.com^$important
+cdn.woopic.com
+proxymedia.woopic.com
+c.woopic.com

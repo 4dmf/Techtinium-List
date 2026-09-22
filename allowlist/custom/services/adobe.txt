@@ -1,10 +1,10 @@
 # Adobe licence verification
-@@||lm.licenses.adobe.com^$important
-@@||activate.adobe.com^$important
+lm.licenses.adobe.com
+activate.adobe.com
 
 # Adobe Cloud Privacy
 # https://www.adobe.com/privacy/experience-cloud.html
-@@||omtrdc.net^$important
-@@||mktoresp.com^$important
+omtrdc.net
+mktoresp.com
 # https://experienceleague.adobe.com/docs/audience-manager/user-guide/reference/demdex-calls.html
-# @@||demdex.net^$important
+# demdex.net

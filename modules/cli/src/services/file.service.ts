@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { Injectable } from '@nestjs/common';
 import * as FS from 'fs';
 import * as Path from 'path';
@@ -12,7 +12,8 @@ import { LogService } from './log.service';
 // https://www.npmjs.com/package/axios-retry
 axiosRetry(Axios, {
   retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
+  retryDelay: (retryCount, error) =>
+    axiosRetry.exponentialDelay(retryCount, error),
 });
 
 const URL_REGEX =
@@ -84,5 +85,43 @@ export class FileService {
       encoding: 'utf-8',
       flag: 'w',
     });
+  }
+
+  public ReplaceFileLines(filePath: string, lines: Iterable<string>): void {
+    const chunkSize = 8 * 1024 * 1024;
+    let chunks: string[] = [];
+    let size = 0;
+    let started = false;
+
+    const flush = (): void => {
+      if (chunks.length === 0) {
+        return;
+      }
+      const data = chunks.join('');
+      if (started) {
+        FS.appendFileSync(filePath, data, { encoding: 'utf-8' });
+      } else {
+        FS.writeFileSync(filePath, data, { encoding: 'utf-8', flag: 'w' });
+        started = true;
+      }
+      chunks = [];
+      size = 0;
+    };
+
+    let first = true;
+    for (const line of lines) {
+      chunks.push(first ? line : `\n${line}`);
+      size += line.length + 1;
+      first = false;
+      if (size >= chunkSize) {
+        flush();
+      }
+    }
+
+    if (chunks.length > 0) {
+      flush();
+    } else if (!started) {
+      FS.writeFileSync(filePath, '', { encoding: 'utf-8', flag: 'w' });
+    }
   }
 }

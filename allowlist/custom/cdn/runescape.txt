@@ -1,2 +1,2 @@
 # Runescape
-@@||cdn.runescape.com^$important
+cdn.runescape.com

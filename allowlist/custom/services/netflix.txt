@@ -1,5 +1,5 @@
 # Netflix
-@@||api-global.netflix.com^$important
-@@||ichnaea.netflix.com^$important
-@@||appboot.netflix.com^$important
-@@||secure.netflix.com^$important
+api-global.netflix.com
+ichnaea.netflix.com
+appboot.netflix.com
+secure.netflix.com

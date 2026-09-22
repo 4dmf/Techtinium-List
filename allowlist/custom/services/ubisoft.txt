@@ -1,6 +1,6 @@
 # Ubisoft
-@@||ubisoft.com^$important
-@@||ubi.com^$important
+ubisoft.com
+ubi.com
 
 # Ubisoft CDN
-@@||cdn.ubi.com^$important
+cdn.ubi.com

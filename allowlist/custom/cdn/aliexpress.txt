@@ -1,2 +1,2 @@
 # Aliexpress
-@@||alicdn.com^$important
+alicdn.com

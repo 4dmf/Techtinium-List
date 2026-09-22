@@ -1,2 +1,2 @@
 # Giphy.com
-@@||giphy.com^$important
+giphy.com

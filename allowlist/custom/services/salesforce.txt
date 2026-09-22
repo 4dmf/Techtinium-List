@@ -1,8 +1,8 @@
 # Sales Force
-@@||www.salesforce.com^$important
-@@||login.salesforce.com^$important
-@@||c.salesforce.com^$important
-@@||edge2.salesforce.com^$important
-@@||verify.salesforce.com^$important
-@@||developer.salesforce.com^$important
-@@||vaas-ve-edge-frankfurt.salesforce.com^$important
+www.salesforce.com
+login.salesforce.com
+c.salesforce.com
+edge2.salesforce.com
+verify.salesforce.com
+developer.salesforce.com
+vaas-ve-edge-frankfurt.salesforce.com

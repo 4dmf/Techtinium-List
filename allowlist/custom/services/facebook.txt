@@ -1,31 +1,30 @@
 # Facebook
-@@||upload.facebook.com^$important
-@@||rupload.facebook.com^$important
-@@||creative.ak.fbcdn.net^$important
-@@||fbcdn.net^$important
+upload.facebook.com
+rupload.facebook.com
+creative.ak.fbcdn.net
+fbcdn.net
 
 # Facebook Messenger
-@@||api.facebook.com^$important
-@@||edge-mqtt.facebook.com^$important
-@@||mqtt.c10r.facebook.com^$important
-@@||portal.fb.com^$important
-@@||star.c10r.facebook.com^$important
-@@||edge-mqtt.facebook.com^$important
-@@||0-edge-chat.facebook.com^$important
-@@||1-edge-chat.facebook.com^$important
-@@||2-edge-chat.facebook.com^$important
-@@||3-edge-chat.facebook.com^$important
-@@||4-edge-chat.facebook.com^$important
-@@||5-edge-chat.facebook.com^$important
-@@||6-edge-chat.facebook.com^$important
-@@||edge-chat.facebook.com^$important
-@@||mqtt-mini.facebook.com^$important
+api.facebook.com
+edge-mqtt.facebook.com
+mqtt.c10r.facebook.com
+portal.fb.com
+star.c10r.facebook.com
+0-edge-chat.facebook.com
+1-edge-chat.facebook.com
+2-edge-chat.facebook.com
+3-edge-chat.facebook.com
+4-edge-chat.facebook.com
+5-edge-chat.facebook.com
+6-edge-chat.facebook.com
+edge-chat.facebook.com
+mqtt-mini.facebook.com
 
 # Instagram
-@@||instagram.c10r.facebook.com^$important
-@@||cdninstagram.com^$important
+instagram.c10r.facebook.com
+cdninstagram.com
 
 # Facebook/Instagram CDN
-@@||scontent.xx.fbcdn.net^$important
-@@||scontent.fgdl5-1.fna.fbcdn.net^$important
-@@||cdn.fbsbx.com^$important
+scontent.xx.fbcdn.net
+scontent.fgdl5-1.fna.fbcdn.net
+cdn.fbsbx.com

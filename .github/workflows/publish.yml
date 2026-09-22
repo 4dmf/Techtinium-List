@@ -38,6 +38,7 @@ jobs:
         --custom ./allowlist/custom \
         --concatExternal ./allowlist/concat \
         --convertToAllow true \
+        --debug false \
         --output ./public
 
     - name: Generate BlockList
@@ -48,16 +49,9 @@ jobs:
         --external ./blocklist/external \
         --custom ./blocklist/custom \
         --concatExternal ./blocklist/concat \
+        --allowList ./public/Techtinium-List.Allow.txt \
+        --debug false \
         --output ./public
-
-    - name: Split Public/Debug
-      run: |
-        split -b 50m -d -a 3 "public/debug.Techtinium-List.Allow.txt" "public/Debug-Techtinium-List.Allow.txt.part-"
-        split -b 50m -d -a 3 "public/debug.Techtinium-List.Block.txt" "public/Debug-Techtinium-List.Block.txt.part-"
-        rm public/debug.Techtinium-List.Allow.txt
-        rm public/debug.Techtinium-List.Block.txt
-      env:
-        CI: true
 
     - name: Build Pages Index
       run: |

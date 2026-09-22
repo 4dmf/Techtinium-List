@@ -1,25 +1,25 @@
 # Google
-@@||www.google.com^$important
-@@||www.google.fr^$important
-@@||suggestqueries.google.com
+www.google.com
+www.google.fr
+suggestqueries.google.com
 
 # Firebase
-@@||firebaselogging-pa.googleapis.com^$important
+firebaselogging-pa.googleapis.com
 
 # Android
-@@||0.client-channel.google.com^$important
-@@||2.android.pool.ntp.org^$important
-@@||android.clients.google.com^$important
-@@||clients1.google.com^$important
-@@||clients2.google.com^$important
-@@||clients3.google.com^$important
-@@||clients4.google.com^$important
-@@||clients5.google.com^$important
-@@||clients6.google.com^$important
+0.client-channel.google.com
+2.android.pool.ntp.org
+android.clients.google.com
+clients1.google.com
+clients2.google.com
+clients3.google.com
+clients4.google.com
+clients5.google.com
+clients6.google.com
 
 # Google Others
-@@||clients.l.google.com^$important
-@@||cse.google.com^$important
-@@||gstatic.com^$important
-@@||geo3.ggpht.com^$important
-@@||ajax.googleapis.com^$important
+clients.l.google.com
+cse.google.com
+gstatic.com
+geo3.ggpht.com
+ajax.googleapis.com

@@ -1,14 +1,14 @@
 # Disney+ Streaming
-@@||cdn.registerdisney.go.com^$important
-@@||dssott.com^$important
-@@||disneyplus.com^$important
-@@||disney-plus.net^$important
-@@||cws.conviva.com^$important
-@@||disneyplus.bn5x.net^$important
-@@||disney-portal.my.onetrust.com^$important
-@@||bamgrid.com^$important
-@@||disneyplus.com.ssl.sc.omtrdc.net^$important
-@@||cws-sjc2.conviva.com^$important
-@@||cws-iad1.conviva.com^$important
-@@||vod-l3c-eu-north-2.media.dssott.com.c.footprint.net^$important
-@@||disney.demdex.net^$important
+cdn.registerdisney.go.com
+dssott.com
+disneyplus.com
+disney-plus.net
+cws.conviva.com
+disneyplus.bn5x.net
+disney-portal.my.onetrust.com
+bamgrid.com
+disneyplus.com.ssl.sc.omtrdc.net
+cws-sjc2.conviva.com
+cws-iad1.conviva.com
+vod-l3c-eu-north-2.media.dssott.com.c.footprint.net
+disney.demdex.net

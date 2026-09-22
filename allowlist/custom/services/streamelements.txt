@@ -1,2 +1,2 @@
 # streamelements.com
-@@||stats.streamelements.com^$important
+stats.streamelements.com

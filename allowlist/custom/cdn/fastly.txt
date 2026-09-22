@@ -1,2 +1,2 @@
 # Fastly
-@@||fastly.net^$important
+fastly.net

@@ -1,2 +1,2 @@
 # Gravatar Image
-@@||gravatar.com^$important
+gravatar.com

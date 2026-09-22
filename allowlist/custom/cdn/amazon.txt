@@ -1,2 +1,2 @@
 # CloudFront
-@@||widget-cdn.rpxnow.com^$important
+widget-cdn.rpxnow.com

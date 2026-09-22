@@ -1,30 +1,30 @@
 # Apple
-@@||www.apple.com^$important
-@@||www.icloud.com^$important
-@@||www.itunes.com^$important
-@@||mzstatic.com^$important
-@@||apple.com.edgesuite.net^$important
-@@||push-apple.com.akadns.net^$important
-@@||itunes-apple.com.akadns.net^$important
-@@||itunes.apple.com.edgesuite.net^$important
-@@||itunes.apple.com^$important
+www.apple.com
+www.icloud.com
+www.itunes.com
+mzstatic.com
+apple.com.edgesuite.net
+push-apple.com.akadns.net
+itunes-apple.com.akadns.net
+itunes.apple.com.edgesuite.net
+itunes.apple.com
 
 # Tools
-@@||swscan.apple.com^$important
-@@||swdownload.apple.com^$important
-@@||xp.apple.com^$important
+swscan.apple.com
+swdownload.apple.com
+xp.apple.com
 
 # Apple CDN
-@@||cdn-apple.com^$important
-@@||updates.cdn-apple.com^$important
-@@||updates-http.cdn-apple.com^$important
-@@||swcdn.apple.com^$important
+cdn-apple.com
+updates.cdn-apple.com
+updates-http.cdn-apple.com
+swcdn.apple.com
 
 # Time
-@@||time-ios.apple.com^$important
-@@||time.apple.com^$important
+time-ios.apple.com
+time.apple.com
 
 # Apple DNS
-@@||origin-apple.com.akadns.net^$important
-@@||apple.com.akadns.net^$important
-@@||apple-dns.net^$important
+origin-apple.com.akadns.net
+apple.com.akadns.net
+apple-dns.net

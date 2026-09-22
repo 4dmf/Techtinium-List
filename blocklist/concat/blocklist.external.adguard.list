@@ -3,3 +3,5 @@ https://adguardteam.github.io/AdguardFilters/MobileFilter/sections/adservers.txt
 https://raw.githubusercontent.com/easylist/easylist/master/easylist/easylist_adservers.txt
 https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV-AGH.txt
 https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_trackers.txt
+https://raw.githubusercontent.com/reek/anti-adblock-killer/master/anti-adblock-killer-filters.txt
+https://big.oisd.nl

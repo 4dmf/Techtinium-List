@@ -1,13 +1,13 @@
 # Youtube
-@@||s.youtube.com^$important
-@@||m.youtube.com^$important
-@@||s2.youtube.com^$important
-@@||youtu.be^$important
-@@||youtube-nocookie.com^$important
-@@||i.ytimg.com^$important
-@@||i1.ytimg.com^$important
-@@||s.ytimg.com^$important
-@@||yt3.ggpht.com^$important
-@@||manifest.googlevideo.com^$important
-@@||redirector.googlevideo.com^$important
-@@||googlevideo.com^$important
+s.youtube.com
+m.youtube.com
+s2.youtube.com
+youtu.be
+youtube-nocookie.com
+i.ytimg.com
+i1.ytimg.com
+s.ytimg.com
+yt3.ggpht.com
+manifest.googlevideo.com
+redirector.googlevideo.com
+googlevideo.com

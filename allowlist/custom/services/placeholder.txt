@@ -1,2 +1,2 @@
 # Placeholder
-@@||via.placeholder.com^$important
+via.placeholder.com

@@ -1,2 +1,2 @@
 # HTTPS Everywhere
-@@||licdn.com^$important
+licdn.com

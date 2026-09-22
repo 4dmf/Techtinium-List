@@ -1,2 +1,2 @@
 # Rockstar Games
-@@||rockstargames.com^$important
+rockstargames.com

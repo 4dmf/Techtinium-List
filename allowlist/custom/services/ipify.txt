@@ -1,2 +1,2 @@
 # Ipify
-@@||api.ipify.org^$important
+api.ipify.org

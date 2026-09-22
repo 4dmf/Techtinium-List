@@ -1,28 +1,27 @@
-# Amazon Prime Video 
-@@||api.amazonvideo.com^$important
-@@||fls-eu.amazon.com^$important
-@@||fls-na.amazon.com^$important
-@@||atv-ext-eu.amazon.com^$important
+# Amazon Prime Video
+api.amazonvideo.com
+fls-eu.amazon.com
+fls-na.amazon.com
+atv-ext-eu.amazon.com
 
 # Twitch
-@@||www.twitch.tv^$important
-@@||api.twitch.tv^$important
+www.twitch.tv
+api.twitch.tv
 
 # Amazon Kindle
-@@||cognito-identity.us-east-1.amazonaws.com^$important
-@@||unagi-na.amazon.com^$important
-@@||ocsp.rootg2.amazontrust.com^$important
-@@||det-ta-g7g.amazon.com^$important
-@@||todo-ta-g7g.amazon.com^$important
-@@||device-messaging-na.amazon.com^$important
-@@||s3-eu-west-1.amazonaws.com^$important
-@@||us-east-1.amazonaws.com^$important
+cognito-identity.us-east-1.amazonaws.com
+unagi-na.amazon.com
+ocsp.rootg2.amazontrust.com
+det-ta-g7g.amazon.com
+todo-ta-g7g.amazon.com
+device-messaging-na.amazon.com
+s3-eu-west-1.amazonaws.com
+us-east-1.amazonaws.com
 
 # AWS
-@@||s3.amazonaws.com^$important
-@@||compute.amazonaws.com^$important
-@@||fls-na.amazon.com^$important
+s3.amazonaws.com
+compute.amazonaws.com
 
 # Amazon CDN
-@@||cloudfront.net^$important
-@@||images-amazon.com^$important
+cloudfront.net
+images-amazon.com

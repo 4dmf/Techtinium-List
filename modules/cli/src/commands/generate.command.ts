@@ -1,6 +1,11 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { AdGuardList, Badge } from '../domain';
-import { LogService, FileService, AdguardRuleService } from '../services';
+import {
+  LogService,
+  FileService,
+  AdguardRuleService,
+  DedupService,
+} from '../services';
 import * as Path from 'path';
 
 interface GenerateCommandOptions {
@@ -11,9 +16,11 @@ interface GenerateCommandOptions {
   output: string;
   badge?: string;
   convertToAllow?: boolean;
+  allowList?: string | null;
+  debug?: boolean;
 }
 
-@Command({ name: 'generate', description: 'Generate AdGuard List' })
+@Command({ name: 'generate', description: 'Generate Technitium List' })
 export class GenerateCommand extends CommandRunner {
   private _list = new AdGuardList();
 
@@ -21,6 +28,7 @@ export class GenerateCommand extends CommandRunner {
     private readonly logService: LogService,
     private readonly fileService: FileService,
     private readonly adguardRuleService: AdguardRuleService,
+    private readonly dedupService: DedupService,
   ) {
     super();
   }
@@ -29,6 +37,8 @@ export class GenerateCommand extends CommandRunner {
     _passedParam: string[],
     options: GenerateCommandOptions,
   ): Promise<void> {
+    const allowRule = options.convertToAllow ?? false;
+
     /**
      * Get Rules
      */
@@ -45,9 +55,9 @@ export class GenerateCommand extends CommandRunner {
       this.logService.log(`Loading ${customFilePath}...`);
       const lines = this.fileService.GetFileLines(customFilePath);
       for (const line of lines) {
-        const rule = this.adguardRuleService.FromAdGuard(line);
-        if (rule) {
-          this._list.add(rule, [customFilePath]);
+        const rule = this.adguardRuleService.FromAdGuard(line, allowRule);
+        if (rule && rule.kind === 'domain') {
+          this._list.add(rule.value, [customFilePath]);
         }
       }
     }
@@ -64,9 +74,12 @@ export class GenerateCommand extends CommandRunner {
         const lines =
           await this.fileService.GetRemoteFileLines(concatExternalFile);
         for (const line of lines) {
-          const rule = this.adguardRuleService.FromAdGuard(line);
-          if (rule) {
-            this._list.add(rule, [concatExternalFilePath, concatExternalFile]);
+          const rule = this.adguardRuleService.FromAdGuard(line, allowRule);
+          if (rule && rule.kind === 'domain') {
+            this._list.add(rule.value, [
+              concatExternalFilePath,
+              concatExternalFile,
+            ]);
           }
         }
       }
@@ -81,12 +94,9 @@ export class GenerateCommand extends CommandRunner {
       for (const externalFile of externalFiles) {
         const lines = await this.fileService.GetRemoteFileLines(externalFile);
         for (const line of lines) {
-          const rule = this.adguardRuleService.FromUrlOrIp(
-            line,
-            options.convertToAllow ?? false,
-          );
-          if (rule) {
-            this._list.add(rule, [externalFilePath, externalFile]);
+          const rule = this.adguardRuleService.FromUrlOrIp(line, allowRule);
+          if (rule && rule.kind === 'domain') {
+            this._list.add(rule.value, [externalFilePath, externalFile]);
           }
         }
       }
@@ -95,15 +105,29 @@ export class GenerateCommand extends CommandRunner {
     /**
      * Generate List
      */
-    this.fileService.ReplaceFile(
+    let entries = this.dedupService.process(this._list.export());
+
+    if (!allowRule && options.allowList) {
+      const allowed = new Set(
+        this.fileService
+          .GetFileLines(options.allowList)
+          .map((line) => line.trim().toLowerCase())
+          .filter((line) => line !== ''),
+      );
+      entries = this.dedupService.removeCoveredBy(entries, allowed);
+    }
+
+    this.fileService.ReplaceFileLines(
       Path.join(options.output, options.name),
-      this.getFileData(false),
+      this.getFileLines(entries, false),
     );
 
-    this.fileService.ReplaceFile(
-      Path.join(options.output, 'debug.' + options.name),
-      this.getFileData(true),
-    );
+    if (options.debug ?? true) {
+      this.fileService.ReplaceFileLines(
+        Path.join(options.output, 'debug.' + options.name),
+        this.getFileLines(entries, true),
+      );
+    }
 
     /**
      * Generate Badge
@@ -112,10 +136,7 @@ export class GenerateCommand extends CommandRunner {
       const badge: Badge = {
         schemaVersion: 1,
         label: options.convertToAllow ? 'Allow' : 'Block',
-        message: this._list
-          .export()
-          .size.toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+        message: entries.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
         color: options.convertToAllow ? 'green' : 'red',
       };
       this.fileService.ReplaceFile(
@@ -125,16 +146,13 @@ export class GenerateCommand extends CommandRunner {
     }
   }
 
-  private getFileData(debug: boolean): string {
-    const fileLines: string[] = [];
-    for (const rule of this._list.export()) {
-      let line = rule[0].replace(/\^\$important$/, '');
-      if (debug) {
-        line = `${line} #${rule[1]}`;
-      }
-      fileLines.push(line);
+  private *getFileLines(
+    entries: Map<string, string>,
+    debug: boolean,
+  ): Generator<string> {
+    for (const [rule, origin] of entries) {
+      yield debug ? `${rule} #${origin}` : rule;
     }
-    return fileLines.join('\n');
   }
 
   @Option({
@@ -165,6 +183,29 @@ export class GenerateCommand extends CommandRunner {
     defaultValue: false,
   })
   parseConvertToAllow(val: string): boolean {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse(val);
+  }
+
+  @Option({
+    flags: '--allowList [string]',
+    description: 'Allow list whitelist; covered block entries are removed',
+    required: false,
+  })
+  parseAllowList(val?: string): string | null {
+    if (val && val.length > 0) {
+      return this._validatePath(val);
+    }
+    return null;
+  }
+
+  @Option({
+    flags: '--debug [boolean]',
+    description: 'Write the debug list',
+    required: false,
+    defaultValue: true,
+  })
+  parseDebug(val: string): boolean {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return JSON.parse(val);
   }

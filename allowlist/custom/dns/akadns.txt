@@ -1,2 +1,2 @@
 # Akadns
-@@||akadns.net^$important
+akadns.net

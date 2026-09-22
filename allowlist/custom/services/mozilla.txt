@@ -1,2 +1,2 @@
 # Firefox Browser
-@@||detectportal.firefox.com^$important
+detectportal.firefox.com

@@ -1,4 +1,4 @@
 # Twitter
-@@||twimg.com^$important
-@@||twitter.com^$important
-@@||t.co^$important
+twimg.com
+twitter.com
+t.co

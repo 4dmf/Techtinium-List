@@ -1,9 +1,9 @@
 # Spotify
-@@||open.spotify.com^$important
-@@||mobile-ap.spotify.com^$important
-@@||apresolve.spotify.com^$important
-@@||upgrade.scdn.com^$important
-@@||market.spotify.com^$important
-@@||spclient.wg.spotify.com^$important
-@@||ap.spotify.com^$important
-@@||spotify.com.edgesuite.net^$important
+open.spotify.com
+mobile-ap.spotify.com
+apresolve.spotify.com
+upgrade.scdn.com
+market.spotify.com
+spclient.wg.spotify.com
+ap.spotify.com
+spotify.com.edgesuite.net

@@ -1,78 +1,213 @@
 import { Injectable } from '@nestjs/common';
-const IPV4_REGEX = /^(?:\d{1,3}\.){3}\d{1,3}$/;
-const IPV6_REGEX = /^[0-9a-fA-F:]+$/;
-const DOMAIN_REGEX = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$/;
+import { isIPv4, isIPv6 } from 'net';
 
-const IGNORE_HOST_START = ['0.0.0.0', '127.0.0.1', '::1'];
+const DOMAIN_REGEX =
+  /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$/;
+
+const COSMETIC_MARKERS = [
+  '##',
+  '#@#',
+  '#?#',
+  '#$#',
+  '#%#',
+  '#@$#',
+  '#@%#',
+  '#@?#',
+  '#+js',
+];
+
+const IGNORE_DOMAINS = new Set([
+  'localhost',
+  'localhost.localdomain',
+  'local',
+  'broadcasthost',
+  'ip6-localhost',
+  'ip6-loopback',
+  'ip6-localnet',
+  'ip6-mcastprefix',
+  'ip6-allnodes',
+  'ip6-allrouters',
+  'ip6-allhosts',
+]);
+
+export type RuleKind = 'domain' | 'ip' | 'cidr';
+
+export interface NormalizedRule {
+  kind: RuleKind;
+  value: string;
+}
 
 @Injectable()
 /**
  * @see https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters
  */
 export class AdguardRuleService {
-  public FromUrlOrIp(value: string, _allowRule: boolean): string | null {
-    return this.normalizeToRawHost(value);
+  public FromUrlOrIp(value: string, allowRule: boolean): NormalizedRule | null {
+    return this.normalizeToRawHost(value, allowRule);
   }
 
-  public FromAdGuard(value: string): string | null {
-    return this.normalizeToRawHost(value);
+  public FromAdGuard(value: string, allowRule: boolean): NormalizedRule | null {
+    return this.normalizeToRawHost(value, allowRule);
   }
 
-  private normalizeToRawHost(value: string): string | null {
-    value = value.split('#')[0].split('!')[0].trim();
+  private normalizeToRawHost(
+    value: string,
+    allowRule: boolean,
+  ): NormalizedRule | null {
+    let text = (value ?? '').trim();
 
-    for (const hostStart of IGNORE_HOST_START) {
-      if (value.startsWith(hostStart)) {
-        value = value.slice(hostStart.length).trim();
-      }
-    }
-
-    if (value === '') {
+    if (text === '') {
       return null;
     }
 
-    value = value.replace(/^@@/, '').trim();
-    value = value.replace(/^\|\|/, '').trim();
-    value = value.replace(/^\|/, '').trim();
-
-    if (value.includes('$')) {
-      value = value.split('$')[0].trim();
+    if (
+      text.startsWith('#') ||
+      text.startsWith('!') ||
+      text.startsWith('[') ||
+      text.startsWith('%') ||
+      text.startsWith('/')
+    ) {
+      return null;
     }
 
-    if (value.includes('^')) {
-      value = value.split('^')[0].trim();
+    if (COSMETIC_MARKERS.some((marker) => text.includes(marker))) {
+      return null;
     }
 
-    if (value.startsWith('http://') || value.startsWith('https://')) {
+    const hashIndex = text.indexOf('#');
+    if (hashIndex !== -1) {
+      text = text.slice(0, hashIndex).trim();
+    }
+
+    if (text === '') {
+      return null;
+    }
+
+    if (text.startsWith('@@')) {
+      if (!allowRule) {
+        return null;
+      }
+      text = text.slice(2).trim();
+    }
+
+    text = text.replace(/^\|\|?/, '').trim();
+    text = text.replace(/^\*\.?/, '').trim();
+
+    const dollarIndex = text.indexOf('$');
+    if (dollarIndex !== -1) {
+      text = text.slice(0, dollarIndex).trim();
+    }
+
+    const caretIndex = text.indexOf('^');
+    if (caretIndex !== -1) {
+      text = text.slice(0, caretIndex).trim();
+    }
+
+    const hostsMatch = text.match(/^[0-9a-fA-F:.]+\s+(\S+)/);
+    if (hostsMatch) {
+      text = hostsMatch[1].trim();
+    }
+
+    if (text === '') {
+      return null;
+    }
+
+    if (text.startsWith('http://') || text.startsWith('https://')) {
       try {
-        value = new URL(value).hostname;
+        text = new URL(text).hostname;
       } catch {
         return null;
       }
     }
 
-    value = value.split('/')[0].trim();
+    text = text.split(/\s+/)[0].trim();
 
-    if (value.includes(':') && !value.includes(']')) {
-      const colonCount = (value.match(/:/g) ?? []).length;
-      if (colonCount === 1) {
-        value = value.split(':')[0].trim();
+    const cidr = this.parseCidr(text);
+    if (cidr) {
+      return cidr;
+    }
+
+    const slashIndex = text.indexOf('/');
+    if (slashIndex > 0) {
+      const address = text.slice(0, slashIndex);
+      if (isIPv4(address) || isIPv6(address)) {
+        return null;
       }
     }
 
-    value = value.replace(/^\[|\]$/g, '').replace(/^\.+|\.+$/g, '').trim();
+    text = text.split('/')[0].trim();
 
-    if (value === '') {
+    if (text.includes(':') && !text.includes(']')) {
+      const colonCount = (text.match(/:/g) ?? []).length;
+      if (colonCount === 1) {
+        text = text.split(':')[0].trim();
+      }
+    }
+
+    text = text
+      .replace(/^\[|\]$/g, '')
+      .replace(/^\.+|\.+$/g, '')
+      .trim();
+
+    if (text === '') {
       return null;
     }
 
-    if (IPV4_REGEX.test(value) || IPV6_REGEX.test(value)) {
-      return value;
+    if (isIPv4(text)) {
+      return { kind: 'ip', value: text };
     }
 
-    const normalizedDomain = value.toLowerCase();
-    if (DOMAIN_REGEX.test(normalizedDomain)) {
-      return normalizedDomain;
+    if (isIPv6(text)) {
+      return { kind: 'ip', value: text };
+    }
+
+    let domain = text.toLowerCase();
+    if (!/^[\u0021-\u007E]+$/.test(domain)) {
+      try {
+        domain = new URL(`http://${domain}`).hostname.toLowerCase();
+      } catch {
+        return null;
+      }
+    }
+
+    if (IGNORE_DOMAINS.has(domain)) {
+      return null;
+    }
+
+    if (DOMAIN_REGEX.test(domain)) {
+      return { kind: 'domain', value: domain };
+    }
+
+    return null;
+  }
+
+  private parseCidr(value: string): NormalizedRule | null {
+    const slashIndex = value.indexOf('/');
+    if (slashIndex <= 0) {
+      return null;
+    }
+
+    const address = value.slice(0, slashIndex);
+    const prefixText = value.slice(slashIndex + 1);
+
+    if (!/^\d{1,3}$/.test(prefixText)) {
+      return null;
+    }
+
+    const prefix = Number(prefixText);
+
+    if (isIPv4(address)) {
+      if (prefix > 32) {
+        return null;
+      }
+      return { kind: 'cidr', value: `${address}/${prefix}` };
+    }
+
+    if (isIPv6(address)) {
+      if (prefix > 128) {
+        return null;
+      }
+      return { kind: 'cidr', value: `${address}/${prefix}` };
     }
 
     return null;

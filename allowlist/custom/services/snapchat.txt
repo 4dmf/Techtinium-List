@@ -1,4 +1,4 @@
 # Snapchat
-@@||api.snapchat.com^$important
-@@||duplex.snapchat.com^$important
-@@||chat.snapchat.com^$important
+api.snapchat.com
+duplex.snapchat.com
+chat.snapchat.com

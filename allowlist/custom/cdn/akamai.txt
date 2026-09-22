@@ -1,7 +1,7 @@
 # Akamai Technologies
-@@||akamaihd.net^$important
-@@||akamaitechnologies.com^$important
-@@||akamaized.net^$important
-@@||akamai.net^$important
-@@||akamaiedge.net^$important
-@@||edgekey.net^$important
+akamaihd.net
+akamaitechnologies.com
+akamaized.net
+akamai.net
+akamaiedge.net
+edgekey.net

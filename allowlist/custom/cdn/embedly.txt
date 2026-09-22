@@ -1,2 +1,2 @@
 # Embedly.com
-@@||cdn.embedly.com^$important
+cdn.embedly.com

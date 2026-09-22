@@ -1,2 +1,2 @@
-# Buffer CDN 
-@@||bufferapp.com^$important
+# Buffer CDN
+bufferapp.com

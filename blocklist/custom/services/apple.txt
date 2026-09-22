@@ -1,2 +1,2 @@
 # Apple
-||metrics.icloud.com^$important
+metrics.icloud.com

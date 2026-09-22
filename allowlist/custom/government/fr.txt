@@ -1,4 +1,4 @@
 # France
-@@||gouv.fr^$important
-@@||gouvernement.fr^$important
-@@||elysee.fr^$important
+gouv.fr
+gouvernement.fr
+elysee.fr

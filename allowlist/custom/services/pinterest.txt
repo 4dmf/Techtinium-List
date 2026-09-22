@@ -1,4 +1,4 @@
 # Pinterest
-@@||www.pinterest.com^$important
-@@||www.pinterest.fr^$important
-@@||pinimg.com^$important
+www.pinterest.com
+www.pinterest.fr
+pinimg.com

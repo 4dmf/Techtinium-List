@@ -1,2 +1,2 @@
 # Sonos
-||msmetrics.ws.sonos.com^$important
+msmetrics.ws.sonos.com
