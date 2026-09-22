@@ -2,7 +2,7 @@ name: "CLI - NodeJS Tests"
 
 on:
   pull_request:
-    branches: ['*']
+    branches: ["*"]
 
 jobs:
   build:
@@ -12,18 +12,18 @@ jobs:
         working-directory: ./modules/cli
 
     steps:
-    - uses: actions/checkout@v5
-      with:
-        path: 'modules/cli'
+      - uses: actions/checkout@v5
+        with:
+          path: "modules/cli"
 
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 22
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-    - name: Install, build, and test
-      run: |
-        cd ./modules/cli
-        npm ci
-        npm run build
-      env:
-        CI: true
+      - name: Install, build, and test
+        run: |
+          cd ./modules/cli
+          npm ci
+          npm run build
+        env:
+          CI: true

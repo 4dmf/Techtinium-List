@@ -4,13 +4,13 @@ about: Add domain on BlockList
 title: "[BLOCK] ?"
 labels: blocklist
 assignees: Ealenn
-
 ---
 
 **Describe**
 A clear and concise description.
 
 **Domain**
+
 ```
 ||example.com^$important
 ```

@@ -1,0 +1,21 @@
+{
+  "name": "techtinium-safelist",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Techtinium SafeList - repository-wide linting and formatting",
+  "license": "GPL-3.0",
+  "scripts": {
+    "lint": "npm run lint:prettier && npm run lint:lists && npm run lint:cli",
+    "lint:prettier": "prettier --check .",
+    "lint:lists": "node scripts/lint-lists.mjs",
+    "lint:cli": "npm run lint --prefix modules/cli",
+    "lint:fix": "npm run lint:fix:prettier && npm run lint:fix:lists && npm run lint:fix:cli",
+    "lint:fix:prettier": "prettier --write .",
+    "lint:fix:lists": "node scripts/lint-lists.mjs --fix",
+    "lint:fix:cli": "npm run lint:fix --prefix modules/cli",
+    "format": "npm run lint:fix"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.8"
+  }
+}

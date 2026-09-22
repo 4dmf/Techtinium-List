@@ -1,23 +1,25 @@
 # Techtinium SafeList
 
-![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-allow.json&style=for-the-badge&logo=firefox) 
-![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-block.json&style=for-the-badge&logo=AdBlock) 
+![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-allow.json&style=for-the-badge&logo=firefox)
+![](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Ealenn/AdGuard-Home-List/gh-pages/badge-block.json&style=for-the-badge&logo=AdBlock)
 
 Fork of [Ealenn/AdGuard-Home-List](https://github.com/Ealenn/AdGuard-Home-List), focused on one goal: formatting and curating safelist/allowlist data according to Technitium standards for use in [Technitium](https://technitium.com/dns/).
 
 This repository keeps the upstream list-building workflow while adapting structure and content conventions for Technitium's SafeList requirements.
 
 ## Table of Contents
+
 - [Techtinium SafeList](#techtinium-safelist)
-	- [How to use this project](#how-to-use-this-project)
-	- [About this fork](#about-this-fork)
-	- [Custom List Provider](#custom-list-provider)
-	- [External List Provider](#external-list-provider)
-		- [Adding an external source](#adding-an-external-source)
-		- [Current sources](#current-sources)
-		- [Provider summary](#provider-summary)
-	- [DNS Providers](#dns-providers)
-	- [Building locally](#building-locally)
+  - [How to use this project](#how-to-use-this-project)
+  - [About this fork](#about-this-fork)
+  - [Custom List Provider](#custom-list-provider)
+  - [External List Provider](#external-list-provider)
+    - [Adding an external source](#adding-an-external-source)
+    - [Current sources](#current-sources)
+    - [Provider summary](#provider-summary)
+    - [DNS Providers](#dns-providers)
+    - [Building locally](#building-locally)
+    - [Linting & formatting](#linting--formatting)
 
 ## How to use this project
 
@@ -56,19 +58,19 @@ without changing anything else.
 A custom file is simply a list of rules, one per line. All of these forms are accepted and are
 normalized to a bare hostname:
 
-| You write                          | Result                                |
-| ---------------------------------- | ------------------------------------- |
-| `example.com`                      | `example.com`                         |
-| `0.0.0.0 example.com` (hosts)      | `example.com`                         |
-| `127.0.0.1 example.com` (hosts)    | `example.com`                         |
-| `\|\|example.com^` (AdGuard)        | `example.com`                         |
-| `\|\|example.com^$important`        | `example.com`                         |
-| `*.example.com` (wildcard)         | `example.com`                         |
-| `https://example.com/path`         | `example.com`                         |
+| You write                           | Result                                         |
+| ----------------------------------- | ---------------------------------------------- |
+| `example.com`                       | `example.com`                                  |
+| `0.0.0.0 example.com` (hosts)       | `example.com`                                  |
+| `127.0.0.1 example.com` (hosts)     | `example.com`                                  |
+| `\|\|example.com^` (AdGuard)        | `example.com`                                  |
+| `\|\|example.com^$important`        | `example.com`                                  |
+| `*.example.com` (wildcard)          | `example.com`                                  |
+| `https://example.com/path`          | `example.com`                                  |
 | `@@\|\|example.com^` (exception)    | allow list: `example.com`, block list: skipped |
-| `# comment` / `! comment`          | ignored                               |
-| `example.com##.selector` (cosmetic) | ignored                              |
-| `1.2.3.4` / `10.0.0.0/8`           | dropped from the domain lists         |
+| `# comment` / `! comment`           | ignored                                        |
+| `example.com##.selector` (cosmetic) | ignored                                        |
+| `1.2.3.4` / `10.0.0.0/8`            | dropped from the domain lists                  |
 
 Notes:
 
@@ -257,6 +259,7 @@ Rules:
 - [reek/anti-adblock-killer](https://github.com/reek/anti-adblock-killer) ![GitHub Repo stars](https://img.shields.io/github/stars/reek/anti-adblock-killer?style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/reek/anti-adblock-killer?style=flat-square) (Network rules only)
 
 #### AllowList
+
 - [hl2guide/AdGuard-Home-Whitelist](https://github.com/hl2guide/AdGuard-Home-Whitelist) ![GitHub Repo stars](https://img.shields.io/github/stars/hl2guide/AdGuard-Home-Whitelist?style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/hl2guide/AdGuard-Home-Whitelist?style=flat-square) (Only selected lists)
 - [GoodnessJSON/PiHole-Whitelist](https://github.com/GoodnessJSON/PiHole-Whitelist) ![GitHub Repo stars](https://img.shields.io/github/stars/GoodnessJSON/PiHole-Whitelist?style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/GoodnessJSON/PiHole-Whitelist?style=flat-square)
 - [anudeepND/whitelist](https://github.com/anudeepND/whitelist) ![GitHub Repo stars](https://img.shields.io/github/stars/anudeepND/whitelist?style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/anudeepND/whitelist?style=flat-square)
@@ -318,3 +321,32 @@ node ./modules/cli/dist/main.js generate \
 ```
 
 The block generation is run **after** the allow generation. `--allowList` removes any block entry that is already covered by the allow list (Technitium lets an allow entry override a block, so those entries are dead weight). Pass `--debug false` to skip writing the large `debug.*` files (used for troubleshooting only); the Publish workflow does this and no longer publishes them.
+
+## Linting & formatting
+
+The repository ships an OS-agnostic lint/format setup (works the same on Windows, Linux and macOS; it only needs Node.js and npm):
+
+```sh
+# Check everything (no files are modified)
+npm install
+npm run lint
+
+# Fix everything that can be fixed automatically
+npm run lint:fix   # or: npm run format
+```
+
+`npm run lint` validates three things:
+
+| Check           | What it covers                                     | Tool                            |
+| --------------- | -------------------------------------------------- | ------------------------------- |
+| `lint:prettier` | Markdown, YAML workflows, JSON and TS config files | [Prettier](https://prettier.io) |
+| `lint:lists`    | List data files (`allowlist/**`, `blocklist/**`)   | `scripts/lint-lists.mjs`        |
+| `lint:cli`      | The TypeScript CLI under `modules/cli`             | ESLint + Prettier               |
+
+The data-file linter (`scripts/lint-lists.mjs`, zero dependencies) enforces the `.editorconfig` rules on every `*.txt` / `*.list` / `*.hosts` file: LF line endings, no trailing whitespace, a single final newline and no UTF-8 BOM. It can also be run directly on a subset:
+
+```sh
+node scripts/lint-lists.mjs --fix allowlist/custom
+```
+
+The [`Lint` workflow](.github/workflows/lint.yml) runs the same checks (check-only) on GitHub Actions on both Ubuntu and Windows for every pull request, so formatting issues fail CI before they are merged. `.gitattributes` keeps every text file at LF line endings regardless of the contributor's OS.

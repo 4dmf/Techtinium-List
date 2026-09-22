@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: "[BUG] Title"
 labels: bug
 assignees: Ealenn
-
 ---
 
 **Describe the bug**

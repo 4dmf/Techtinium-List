@@ -1,0 +1,13 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+public/
+
+# Lockfiles
+package-lock.json
+modules/cli/package-lock.json
+
+# List data files (checked by scripts/lint-lists.mjs instead)
+allowlist/
+blocklist/

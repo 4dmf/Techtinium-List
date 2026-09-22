@@ -1,0 +1,16 @@
+# Normalize all text files to LF in the repo and in working trees on any OS,
+# matching .editorconfig and the lint/format tooling.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.zip binary
+*.woff binary
+*.woff2 binary
